@@ -3,6 +3,14 @@ import { Label } from '@/components/ui/label';
 import type { FieldMetadata } from '@/types';
 import { Textarea } from './ui/textarea';
 
+/**
+ * Props for the FieldEditor component.
+ *
+ * @property {FieldMetadata} field - Metadata about the field being edited (key, type, isLongText)
+ * @property {any} value - Current value of the field
+ * @property {number} itemIndex - Index of the item in the JSON array
+ * @property {Function} onUpdate - Callback function invoked when the field value changes
+ */
 type FieldEditorProps = {
     field: FieldMetadata;
     value: any;
@@ -10,7 +18,35 @@ type FieldEditorProps = {
     onUpdate: (itemIndex: number, key: string, value: any) => void;
 };
 
+/**
+ * FieldEditor component renders the appropriate input control based on field metadata.
+ *
+ * Renders different input types based on the field configuration:
+ * - Textarea: For long text fields (> 100 chars or with newlines) with RTL support
+ * - Number input: For numeric fields with custom styling to hide spinners
+ * - Text input: Default for all other field types
+ *
+ * @component
+ * @param {FieldEditorProps} props - Component props
+ * @returns {React.ReactElement} Rendered field editor component
+ *
+ * @example
+ * ```tsx
+ * <FieldEditor
+ *   field={{ key: 'name', type: 'string', isLongText: false }}
+ *   value="John Doe"
+ *   itemIndex={0}
+ *   onUpdate={(index, key, value) => console.log('Updated', key, value)}
+ * />
+ * ```
+ */
 export const FieldEditor: React.FC<FieldEditorProps> = ({ field, value, itemIndex, onUpdate }) => {
+    /**
+     * Handles changes to the field value.
+     * Parses numeric values to float, keeps strings as-is.
+     *
+     * @param {string} newValue - The new value from the input
+     */
     const handleChange = (newValue: string) => {
         const parsedValue = field.type === 'number' ? parseFloat(newValue) : newValue;
         onUpdate(itemIndex, field.key, parsedValue);

@@ -7,13 +7,70 @@ import { Textarea } from '@/components/ui/textarea';
 import { analyzeJsonStructure, parseJson } from '@/lib/utils';
 import type { FieldMetadata } from '@/types';
 
+/**
+ * JsonEditor is the main application component for editing JSON arrays.
+ *
+ * This component provides a visual editor for JSON arrays with the following features:
+ * - Paste JSON arrays into a textarea
+ * - Automatic JSON parsing with error correction (missing brackets, trailing commas)
+ * - Dynamic field type detection (string, number, boolean)
+ * - Intelligent UI rendering (textareas for long text, number inputs for numbers)
+ * - Real-time editing with state management
+ * - RTL support for long text fields
+ * - Responsive layout
+ *
+ * The editor automatically:
+ * - Detects field types from the first array item
+ * - Groups numeric fields horizontally for compact display
+ * - Renders long text (>100 chars or multi-line) in textareas
+ * - Updates the JSON in the input field when focused
+ *
+ * @component
+ * @returns {React.ReactElement} The main JSON editor interface
+ *
+ * @example
+ * ```tsx
+ * // The component is used as a default export in the app
+ * export default JsonEditor;
+ * ```
+ */
 const JsonEditor: React.FC = () => {
+    /**
+     * Raw JSON text input by the user.
+     * Updated whenever the textarea changes.
+     */
     const [jsonText, setJsonText] = useState('');
+
+    /**
+     * The original parsed JSON data from user input.
+     * Null when no valid JSON has been entered.
+     */
     const [parsedData, setParsedData] = useState<any[] | null>(null);
+
+    /**
+     * Metadata about each field in the JSON structure.
+     * Derived from analyzing the first item in the array.
+     */
     const [fields, setFields] = useState<FieldMetadata[]>([]);
+
+    /**
+     * The working copy of the JSON data being edited.
+     * Changes are tracked here before being reflected in the textarea.
+     */
     const [editedData, setEditedData] = useState<any[]>([]);
+
+    /**
+     * Error message displayed when JSON parsing fails.
+     * Empty string when there's no error.
+     */
     const [error, setError] = useState<string>('');
 
+    /**
+     * Handles changes to the JSON textarea input.
+     * Parses the JSON, extracts field metadata, and updates state.
+     *
+     * @param {string} text - The new JSON text from the textarea
+     */
     const handleJsonInput = (text: string) => {
         setJsonText(text);
         const parsed = parseJson(text);
@@ -32,6 +89,14 @@ const JsonEditor: React.FC = () => {
         }
     };
 
+    /**
+     * Updates a specific field in a JSON array item.
+     * Called when a user modifies a field in the editor.
+     *
+     * @param {number} itemIndex - The index of the item in the array
+     * @param {string} key - The field key to update
+     * @param {any} value - The new value for the field
+     */
     const handleFieldUpdate = (itemIndex: number, key: string, value: any) => {
         setEditedData((prev) => {
             const updated = [...prev];
