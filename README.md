@@ -2,7 +2,7 @@
 
 [![wakatime](https://wakatime.com/badge/user/a0b906ce-b8e7-4463-8bce-383238df6d4b/project/ac90e078-9dc5-4673-ba43-2ead61819db7.svg)](https://wakatime.com/badge/user/a0b906ce-b8e7-4463-8bce-383238df6d4b/project/ac90e078-9dc5-4673-ba43-2ead61819db7)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/cd992526-abbd-46ea-af0f-3dcc0d3b3dcd/deploy-status)](https://app.netlify.com/projects/bluckajean/deploys)
-[![codecov](https://codecov.io/gh/ragaeeb/bluckajean/graph/badge.svg?token=A2E06C7QXO)](https://codecov.io/gh/ragaeeb/bluckajean)
+[![codecov](https://codecov.io/gh/ragaeeb/bluckajean/graph/badge.svg?token=H1YOTGY4NQ)](https://codecov.io/gh/ragaeeb/bluckajean)
 [![typescript](https://badgen.net/badge/icon/typescript?icon=typescript&label&color=blue)](https://www.typescriptlang.org)
 [![Node.js CI](https://github.com/ragaeeb/bluckajean/actions/workflows/build.yml/badge.svg)](https://github.com/ragaeeb/bluckajean/actions/workflows/build.yml)
 ![Bun](https://img.shields.io/badge/Bun-%23000000.svg?style=for-the-badge&logo=bun&logoColor=white)
