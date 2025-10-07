@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/ragaeeb/bluckajean/compare/v1.0.0...v1.0.1) (2025-10-07)
+
+
+### Bug Fixes
+
+* **json:** Fix JSON changes not refreshing ([802ebf4](https://github.com/ragaeeb/bluckajean/commit/802ebf47e5d4a9e47e27f8a5acac79f463fce7fe))
+
 # 1.0.0 (2025-10-06)
 
 
