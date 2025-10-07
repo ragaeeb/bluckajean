@@ -1,3 +1,4 @@
+import { getArabicScore } from 'bitaboom';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import type { FieldMetadata } from '@/types';
@@ -53,14 +54,16 @@ export const FieldEditor: React.FC<FieldEditorProps> = ({ field, value, itemInde
     };
 
     if (field.isLongText) {
+        const arabicScore = getArabicScore(value);
+
         return (
             <div className="space-y-2">
                 <Label htmlFor={`${itemIndex}-${field.key}`}>{field.key}</Label>
                 <Textarea
                     id={`${itemIndex}-${field.key}`}
                     defaultValue={String(value)}
-                    dir="rtl"
-                    className="min-h-[120px] w-full font-mono text-sm"
+                    dir={arabicScore > 0.8 ? 'rtl' : undefined}
+                    className="min-h-[120px] w-full text-sm"
                     onBlur={(e) => handleChange(e.target.value)}
                 />
             </div>

@@ -4,7 +4,7 @@ import type React from 'react';
 import { useState } from 'react';
 import { JsonItemEditor } from '@/components/JsonItemEditor';
 import { Textarea } from '@/components/ui/textarea';
-import { analyzeJsonStructure, parseJson } from '@/lib/utils';
+import { analyzeJsonStructure, fastHash, parseJson } from '@/lib/utils';
 import type { FieldMetadata } from '@/types';
 
 /**
@@ -112,12 +112,14 @@ const JsonEditor: React.FC = () => {
                     id="json-input"
                     value={jsonText}
                     onFocus={() => {
-                        const savedJson = JSON.stringify(editedData, null, 2);
-                        setJsonText(savedJson);
+                        if (editedData.length) {
+                            const savedJson = JSON.stringify(editedData, null, 2);
+                            setJsonText(savedJson);
+                        }
                     }}
                     onChange={(e) => handleJsonInput(e.target.value)}
                     placeholder="Paste your JSON array here..."
-                    className="min-h-[150px] w-full font-mono text-[10px] md:text-[10px]"
+                    className="min-h-[150px] w-full text-[10px] md:text-[10px]"
                 />
                 {error && <p className="text-red-500 text-sm">{error}</p>}
             </div>
@@ -126,7 +128,7 @@ const JsonEditor: React.FC = () => {
                 <div className="space-y-4">
                     {editedData.map((item, index) => (
                         <JsonItemEditor
-                            key={index.toString()}
+                            key={fastHash(item)}
                             item={item}
                             index={index}
                             fields={fields}
