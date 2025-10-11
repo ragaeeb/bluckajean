@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/ragaeeb/bluckajean/compare/v1.0.1...v1.1.0) (2025-10-11)
+
+
+### Features
+
+* **delete:** Delete field, footer and duplicate ([229640c](https://github.com/ragaeeb/bluckajean/commit/229640ce5eae120d78b30abe29ea75518df01fde))
+
 ## [1.0.1](https://github.com/ragaeeb/bluckajean/compare/v1.0.0...v1.0.1) (2025-10-07)
 
 
