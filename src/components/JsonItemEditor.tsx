@@ -1,5 +1,6 @@
 import type { FieldMetadata } from '@/types';
 import { FieldEditor } from './FieldEditor';
+import { InteractiveHoverButton } from './ui/interactive-hover-button';
 
 /**
  * Represents a single item in the JSON array.
@@ -19,6 +20,8 @@ type JsonItemEditorProps = {
     item: JsonItem;
     index: number;
     fields: FieldMetadata[];
+    onDeleteField: (itemIndex: number, key: string) => void;
+    onDuplicate: (itemIndex: number) => void;
     onUpdate: (itemIndex: number, key: string, value: any) => void;
 };
 
@@ -49,13 +52,23 @@ type JsonItemEditorProps = {
  * />
  * ```
  */
-export const JsonItemEditor: React.FC<JsonItemEditorProps> = ({ item, index, fields, onUpdate }) => {
+export const JsonItemEditor: React.FC<JsonItemEditorProps> = ({
+    item,
+    index,
+    fields,
+    onUpdate,
+    onDeleteField,
+    onDuplicate,
+}) => {
     const numericFields = fields.filter((f) => f.type === 'number');
     const otherFields = fields.filter((f) => f.type !== 'number');
 
     return (
         <div className="space-y-4 rounded-lg border p-6">
-            <h3 className="font-semibold text-lg">Item {index + 1}</h3>
+            <div className="flex items-center justify-between">
+                <h3 className="font-semibold text-lg">Item {index + 1}</h3>
+                <InteractiveHoverButton onClick={() => onDuplicate(index)}>Duplicate</InteractiveHoverButton>
+            </div>
             {numericFields.length > 0 && (
                 <div className="flex flex-wrap gap-4">
                     {numericFields.map((field) => (
@@ -65,6 +78,7 @@ export const JsonItemEditor: React.FC<JsonItemEditorProps> = ({ item, index, fie
                             value={item[field.key]}
                             itemIndex={index}
                             onUpdate={onUpdate}
+                            onDelete={onDeleteField}
                         />
                     ))}
                 </div>
@@ -76,6 +90,7 @@ export const JsonItemEditor: React.FC<JsonItemEditorProps> = ({ item, index, fie
                     value={item[field.key]}
                     itemIndex={index}
                     onUpdate={onUpdate}
+                    onDelete={onDeleteField}
                 />
             ))}
         </div>

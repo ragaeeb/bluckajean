@@ -105,6 +105,24 @@ const JsonEditor: React.FC = () => {
         });
     };
 
+    const handleDeleteField = (itemIndex: number, key: string) => {
+        setEditedData((prev) => {
+            const updated = [...prev];
+            const { [key]: _, ...rest } = updated[itemIndex];
+            updated[itemIndex] = rest;
+            return updated;
+        });
+    };
+
+    const handleDuplicateItem = (itemIndex: number) => {
+        setEditedData((prev) => {
+            const updated = [...prev];
+            const itemToDuplicate = { ...updated[itemIndex] };
+            updated.splice(itemIndex + 1, 0, itemToDuplicate);
+            return updated;
+        });
+    };
+
     return (
         <div className="container mx-auto w-full space-y-6 p-6">
             <div className="space-y-2">
@@ -132,6 +150,8 @@ const JsonEditor: React.FC = () => {
                             item={item}
                             index={index}
                             fields={fields}
+                            onDeleteField={handleDeleteField}
+                            onDuplicate={handleDuplicateItem}
                             onUpdate={handleFieldUpdate}
                         />
                     ))}

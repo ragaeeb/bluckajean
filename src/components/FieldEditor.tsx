@@ -2,6 +2,7 @@ import { getArabicScore } from 'bitaboom';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import type { FieldMetadata } from '@/types';
+import { DeleteButton } from './DeleteButton';
 import { Textarea } from './ui/textarea';
 
 /**
@@ -16,6 +17,7 @@ type FieldEditorProps = {
     field: FieldMetadata;
     value: any;
     itemIndex: number;
+    onDelete: (itemIndex: number, key: string) => void;
     onUpdate: (itemIndex: number, key: string, value: any) => void;
 };
 
@@ -41,7 +43,7 @@ type FieldEditorProps = {
  * />
  * ```
  */
-export const FieldEditor: React.FC<FieldEditorProps> = ({ field, value, itemIndex, onUpdate }) => {
+export const FieldEditor: React.FC<FieldEditorProps> = ({ field, value, itemIndex, onDelete, onUpdate }) => {
     /**
      * Handles changes to the field value.
      * Parses numeric values to float, keeps strings as-is.
@@ -58,7 +60,10 @@ export const FieldEditor: React.FC<FieldEditorProps> = ({ field, value, itemInde
 
         return (
             <div className="space-y-2">
-                <Label htmlFor={`${itemIndex}-${field.key}`}>{field.key}</Label>
+                <div className="flex items-center justify-between">
+                    <Label htmlFor={`${itemIndex}-${field.key}`}>{field.key}</Label>
+                    <DeleteButton onClick={() => onDelete(itemIndex, field.key)} />
+                </div>
                 <Textarea
                     id={`${itemIndex}-${field.key}`}
                     defaultValue={String(value)}
@@ -73,9 +78,12 @@ export const FieldEditor: React.FC<FieldEditorProps> = ({ field, value, itemInde
     if (field.type === 'number') {
         return (
             <div className="w-auto space-y-1">
-                <Label htmlFor={`${itemIndex}-${field.key}`} className="text-xs">
-                    {field.key}
-                </Label>
+                <div className="flex items-center gap-2">
+                    <Label htmlFor={`${itemIndex}-${field.key}`} className="text-xs">
+                        {field.key}
+                    </Label>
+                    <DeleteButton onClick={() => onDelete(itemIndex, field.key)} />
+                </div>
                 <Input
                     id={`${itemIndex}-${field.key}`}
                     type="number"
@@ -89,7 +97,10 @@ export const FieldEditor: React.FC<FieldEditorProps> = ({ field, value, itemInde
 
     return (
         <div className="space-y-2">
-            <Label htmlFor={`${itemIndex}-${field.key}`}>{field.key}</Label>
+            <div className="flex items-center justify-between">
+                <Label htmlFor={`${itemIndex}-${field.key}`}>{field.key}</Label>
+                <DeleteButton onClick={() => onDelete(itemIndex, field.key)} />
+            </div>
             <Input
                 id={`${itemIndex}-${field.key}`}
                 type="text"
