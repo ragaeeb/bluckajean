@@ -1,7 +1,7 @@
 # bluckajean 📝
 
 [![wakatime](https://wakatime.com/badge/user/a0b906ce-b8e7-4463-8bce-383238df6d4b/project/ac90e078-9dc5-4673-ba43-2ead61819db7.svg)](https://wakatime.com/badge/user/a0b906ce-b8e7-4463-8bce-383238df6d4b/project/ac90e078-9dc5-4673-ba43-2ead61819db7)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/cd992526-abbd-46ea-af0f-3dcc0d3b3dcd/deploy-status)](https://app.netlify.com/projects/bluckajean/deploys)
+[![Vercel Deploy](https://deploy-badge.vercel.app/vercel/bluckajean)](https://bluckajean.vercel.app)
 [![codecov](https://codecov.io/gh/ragaeeb/bluckajean/graph/badge.svg?token=H1YOTGY4NQ)](https://codecov.io/gh/ragaeeb/bluckajean)
 [![typescript](https://badgen.net/badge/icon/typescript?icon=typescript&label&color=blue)](https://www.typescriptlang.org)
 [![Node.js CI](https://github.com/ragaeeb/bluckajean/actions/workflows/build.yml/badge.svg)](https://github.com/ragaeeb/bluckajean/actions/workflows/build.yml)
@@ -12,8 +12,6 @@
 A powerful, intuitive visual JSON array editor built with Next.js 15, React 19, and TypeScript. Edit JSON data with intelligent field detection, automatic type inference, and a clean, responsive interface.
 
 ## Demo
-
-[Demo on Netlify](https://bluckajean.netlify.app)
 
 ## ✨ Features
 
@@ -42,7 +40,7 @@ A powerful, intuitive visual JSON array editor built with Next.js 15, React 19, 
 
 ### Prerequisites
 
-- [Bun](https://bun.sh) >= 1.2.23
+- [Bun](https://bun.sh) >= 1.3.0
 - Node.js (for Next.js compatibility)
 
 ### Installation
