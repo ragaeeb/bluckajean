@@ -36,7 +36,8 @@ const isLongText = (value: string): boolean => {
 
 /**
  * Analyzes the structure of a JSON array to extract field metadata.
- * Examines the first item in the array to determine field types and display requirements.
+ * Examines all items in the array to determine field types and display requirements.
+ * For string fields, checks the longest value across all items to determine if textarea is needed.
  *
  * @param {any[]} data - Array of JSON objects to analyze
  * @returns {FieldMetadata[]} Array of field metadata containing key, type, and display information
@@ -55,11 +56,23 @@ export const analyzeJsonStructure = (data: any[]): FieldMetadata[] => {
     }
 
     const firstItem = data[0];
-    return Object.keys(firstItem).map((key) => ({
-        isLongText: typeof firstItem[key] === 'string' && isLongText(firstItem[key]),
-        key,
-        type: detectFieldType(firstItem[key]),
-    }));
+    return Object.keys(firstItem).map((key) => {
+        const type = detectFieldType(firstItem[key]);
+
+        // For string fields, check all items to find the longest value
+        let shouldBeLongText = false;
+        if (type === 'string') {
+            for (const item of data) {
+                const value = item[key];
+                if (typeof value === 'string' && isLongText(value)) {
+                    shouldBeLongText = true;
+                    break;
+                }
+            }
+        }
+
+        return { isLongText: shouldBeLongText, key, type };
+    });
 };
 
 /**
