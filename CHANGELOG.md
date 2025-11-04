@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/ragaeeb/bluckajean/compare/v1.1.0...v1.1.1) (2025-11-04)
+
+
+### Bug Fixes
+
+* **long:** Fix where long texts for a field would show up as an input ([8dcbee6](https://github.com/ragaeeb/bluckajean/commit/8dcbee60b0a588aff7fc59c797df81213c4bf422))
+
 # [1.1.0](https://github.com/ragaeeb/bluckajean/compare/v1.0.1...v1.1.0) (2025-10-11)
 
 
