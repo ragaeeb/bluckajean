@@ -19,6 +19,8 @@
         "@semantic-release/changelog": "latest",
         "@semantic-release/git": "latest",
         "@tailwindcss/postcss": "latest",
+        "@testing-library/dom": "file:vendor/testing-library-dom",
+        "@testing-library/react": "file:vendor/testing-library-react",
         "@types/bun": "latest",
         "@types/node": "latest",
         "@types/react": "latest",

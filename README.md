@@ -75,7 +75,10 @@ bun run start
 
 ## 🧪 Testing
 
-The project uses Bun's built-in test runner for fast, reliable testing.
+The project uses Bun's built-in test runner alongside a lightweight, vendored
+implementation of `@testing-library/react` and `@testing-library/dom`. This
+setup keeps the developer experience familiar while remaining fully compatible
+with Bun's execution environment.
 
 ```bash
 # Run all tests
@@ -90,9 +93,14 @@ bun test --coverage
 
 ### Test Coverage
 
-Comprehensive unit tests for core utilities:
+Unit tests cover the JSON analysis helpers and the interactive editor
+experience:
+
 - `parseJson`: JSON parsing with error correction
 - `analyzeJsonStructure`: Field type detection and metadata extraction
+- `src/app/page`: end-to-end behaviour of the JSON editor surface
+- `FieldEditor`: individual field rendering, coercion, and delete handling
+- `JsonItemEditor`: grouping, duplication, and field removal
 
 ## 📖 Usage
 
@@ -184,6 +192,18 @@ bluckajean/
 - **[Bun](https://bun.sh)** - Fast JavaScript runtime and package manager
 - **[Biome](https://biomejs.dev)** - Fast formatter and linter
 - **[Semantic Release](https://semantic-release.gitbook.io)** - Automated version management
+- **[@testing-library/react](https://testing-library.com/docs/react-testing-library/intro/)** - Vendored DOM testing utilities for Bun
+
+## 🧭 Local Workflow
+
+- Ensure Bun ≥ 1.3 is installed before running any scripts.
+- Install dependencies with `bun install`. (If you are behind a proxy, export
+  the appropriate `HTTP_PROXY`/`HTTPS_PROXY` variables first.)
+- Update dependencies with `bun update --latest` to stay on the latest
+  compatible releases.
+- Run `bun run build` prior to committing to confirm the production bundle is
+  healthy.
+- Execute `bun test` to run the complete unit and component suite.
 
 ## 📝 Code Quality
 

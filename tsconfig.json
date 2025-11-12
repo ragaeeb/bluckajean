@@ -16,6 +16,12 @@
     "paths": {
       "@/*": [
         "./src/*"
+      ],
+      "@testing-library/react": [
+        "./vendor/testing-library-react/index.tsx"
+      ],
+      "@testing-library/dom": [
+        "./vendor/testing-library-dom/index.ts"
       ]
     },
     "plugins": [

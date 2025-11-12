@@ -19,6 +19,8 @@
         "@semantic-release/changelog": "^6.0.3",
         "@semantic-release/git": "^10.0.1",
         "@tailwindcss/postcss": "^4.1.16",
+        "@testing-library/dom": "file:vendor/testing-library-dom",
+        "@testing-library/react": "file:vendor/testing-library-react",
         "@types/bun": "^1.3.1",
         "@types/node": "^24.10.0",
         "@types/react": "^19.2.2",

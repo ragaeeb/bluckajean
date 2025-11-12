@@ -7,6 +7,45 @@ import { Textarea } from '@/components/ui/textarea';
 import { analyzeJsonStructure, fastHash, parseJson } from '@/lib/utils';
 import type { FieldMetadata } from '@/types';
 
+export type JsonEditorSnapshot = {
+    parsedData: any[] | null;
+    fields: FieldMetadata[];
+    editedData: any[];
+    error: string;
+};
+
+export const deriveEditorState = (text: string): JsonEditorSnapshot => {
+    const parsed = parseJson(text);
+    if (parsed) {
+        return {
+            editedData: JSON.parse(JSON.stringify(parsed)),
+            error: '',
+            fields: analyzeJsonStructure(parsed),
+            parsedData: parsed,
+        };
+    }
+
+    if (text.trim()) {
+        return {
+            editedData: [],
+            error: 'Invalid JSON format',
+            fields: [],
+            parsedData: null,
+        };
+    }
+
+    return {
+        editedData: [],
+        error: '',
+        fields: [],
+        parsedData: null,
+    };
+};
+
+export const serializeEditedData = (data: any[]): string => {
+    return JSON.stringify(data, null, 2);
+};
+
 /**
  * JsonEditor is the main application component for editing JSON arrays.
  *
@@ -73,20 +112,11 @@ const JsonEditor: React.FC = () => {
      */
     const handleJsonInput = (text: string) => {
         setJsonText(text);
-        const parsed = parseJson(text);
-
-        if (parsed) {
-            setParsedData(parsed);
-            setEditedData(JSON.parse(JSON.stringify(parsed)));
-            setFields(analyzeJsonStructure(parsed));
-            setError('');
-        } else if (text.trim()) {
-            setError('Invalid JSON format');
-            setParsedData(null);
-        } else {
-            setError('');
-            setParsedData(null);
-        }
+        const snapshot = deriveEditorState(text);
+        setParsedData(snapshot.parsedData);
+        setEditedData(snapshot.editedData);
+        setFields(snapshot.fields);
+        setError(snapshot.error);
     };
 
     /**
@@ -131,8 +161,7 @@ const JsonEditor: React.FC = () => {
                     value={jsonText}
                     onFocus={() => {
                         if (editedData.length) {
-                            const savedJson = JSON.stringify(editedData, null, 2);
-                            setJsonText(savedJson);
+                            setJsonText(serializeEditedData(editedData));
                         }
                     }}
                     onChange={(e) => handleJsonInput(e.target.value)}
