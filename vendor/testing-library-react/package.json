@@ -1,0 +1,16 @@
+{
+    "name": "@testing-library/react",
+    "version": "0.0.0-local",
+    "type": "module",
+    "main": "./index.tsx",
+    "exports": {
+        ".": "./index.tsx"
+    },
+    "peerDependencies": {
+        "react": ">=18",
+        "react-dom": ">=18"
+    },
+    "dependencies": {
+        "@testing-library/dom": "file:../testing-library-dom"
+    }
+}
