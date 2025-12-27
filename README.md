@@ -9,9 +9,7 @@
 ![GitHub License](https://img.shields.io/github/license/ragaeeb/bluckajean)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A powerful, intuitive visual JSON array editor built with Next.js 15, React 19, and TypeScript. Edit JSON data with intelligent field detection, automatic type inference, and a clean, responsive interface.
-
-## Demo
+A powerful, intuitive visual JSON array editor built with Vite, React 19, and TypeScript. Edit JSON data with intelligent field detection, automatic type inference, and a clean, responsive interface.
 
 ## ✨ Features
 
@@ -29,11 +27,10 @@ A powerful, intuitive visual JSON array editor built with Next.js 15, React 19, 
 - **Real-Time Editing**: Changes are tracked and can be copied back to the JSON input
 
 ### Developer Experience
-- Built with Next.js 15 and React 19
+- Built with Vite and React 19
 - Full TypeScript support with comprehensive type safety
 - Tailwind CSS for styling
 - Bun for fast package management and testing
-- Comprehensive test coverage with Bun's built-in test runner
 - JSDoc documentation throughout the codebase
 
 ## 🚀 Getting Started
@@ -41,7 +38,6 @@ A powerful, intuitive visual JSON array editor built with Next.js 15, React 19, 
 ### Prerequisites
 
 - [Bun](https://bun.sh) >= 1.3.0
-- Node.js (for Next.js compatibility)
 
 ### Installation
 
@@ -57,11 +53,11 @@ bun install
 ### Development
 
 ```bash
-# Start the development server with Turbopack
+# Start the development server
 bun run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+Open [http://localhost:5173](http://localhost:5173) in your browser to see the application.
 
 ### Building for Production
 
@@ -69,30 +65,9 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to see the a
 # Create an optimized production build
 bun run build
 
-# Start the production server
-bun run start
+# Preview the production build locally
+bun run preview
 ```
-
-## 🧪 Testing
-
-The project uses Bun's built-in test runner for fast, reliable testing.
-
-```bash
-# Run all tests
-bun test
-
-# Run tests in watch mode
-bun test --watch
-
-# Generate coverage report
-bun test --coverage
-```
-
-### Test Coverage
-
-Comprehensive unit tests for core utilities:
-- `parseJson`: JSON parsing with error correction
-- `analyzeJsonStructure`: Field type detection and metadata extraction
 
 ## 📖 Usage
 
@@ -119,7 +94,7 @@ Comprehensive unit tests for core utilities:
 ### Supported Field Types
 
 | Type | Detection | UI Component |
-|------|-----------|--------------|
+|------|-----------|--------------| 
 | String (short) | Text ≤100 chars, no newlines | Text input |
 | String (long) | Text >100 chars or contains newlines | Textarea (RTL) |
 | Number | Numeric values | Number input |
@@ -151,18 +126,20 @@ Long text fields automatically enable RTL (right-to-left) text direction, perfec
 ```
 bluckajean/
 ├── src/
-│   ├── app/
-│   │   └── page.tsx              # Main application component
+│   ├── main.tsx                  # Vite entry point
+│   ├── App.tsx                   # Main application component
+│   ├── index.css                 # Global styles and Tailwind config
 │   ├── components/
-│   │   ├── ui/                   # shadcn/ui components
+│   │   ├── ui/                   # UI primitives (Input, Label, Textarea)
 │   │   ├── FieldEditor.tsx       # Individual field editor
-│   │   └── JsonItemEditor.tsx    # JSON item card component
+│   │   ├── JsonItemEditor.tsx    # JSON item card component
+│   │   └── Footer.tsx            # App footer
 │   ├── lib/
 │   │   └── utils.ts              # Utility functions (parsing, analysis)
 │   └── types/
 │       └── index.ts              # TypeScript type definitions
-├── tests/
-│   └── utils.test.ts             # Unit tests
+├── index.html                    # HTML entry point
+├── vite.config.ts                # Vite configuration
 ├── package.json
 ├── tsconfig.json
 └── README.md
@@ -171,14 +148,13 @@ bluckajean/
 ## 🛠️ Tech Stack
 
 ### Core
-- **[Next.js 15](https://nextjs.org)** - React framework with Turbopack
+- **[Vite](https://vite.dev)** - Fast build tool and dev server
 - **[React 19](https://react.dev)** - UI library
 - **[TypeScript](https://www.typescriptlang.org)** - Type safety
 
 ### Styling
 - **[Tailwind CSS 4](https://tailwindcss.com)** - Utility-first CSS
 - **[Radix UI](https://www.radix-ui.com)** - Accessible component primitives
-- **[Lucide React](https://lucide.dev)** - Icon library
 
 ### Development Tools
 - **[Bun](https://bun.sh)** - Fast JavaScript runtime and package manager
@@ -197,31 +173,9 @@ Comprehensive JSDoc comments throughout the codebase explain:
 - Usage examples
 - Edge cases and special considerations
 
-### Testing
-Unit tests cover critical functionality:
-- JSON parsing edge cases
-- Type detection accuracy
-- Error handling
-- Data structure analysis
-
 ## 🚀 Deployment
 
-### Netlify
-
-This project is configured for deployment on Netlify:
-
-1. **Connect Repository**: Link your GitHub repository to Netlify
-2. **Build Settings**:
-   - Build command: `bun run build`
-   - Publish directory: `.next`
-3. **Environment Variables**: None required for basic deployment
-4. **Deploy**: Netlify will automatically build and deploy your site
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/ragaeeb/bluckajean)
-
 ### Vercel
-
-Alternative deployment on Vercel (Next.js creators):
 
 ```bash
 # Install Vercel CLI
@@ -230,6 +184,16 @@ npm i -g vercel
 # Deploy
 vercel
 ```
+
+### Netlify
+
+1. **Connect Repository**: Link your GitHub repository to Netlify
+2. **Build Settings**:
+   - Build command: `bun run build`
+   - Publish directory: `dist`
+3. **Deploy**: Netlify will automatically build and deploy your site
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/ragaeeb/bluckajean)
 
 ## 🤝 Contributing
 
@@ -240,17 +204,15 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
 3. Make your changes
-4. Run tests (`bun test`)
-5. Format code (`bun run format`)
-6. Commit changes (`git commit -m 'Add amazing feature'`)
-7. Push to branch (`git push origin feature/amazing-feature`)
-8. Open a Pull Request
+4. Format code (`bun run format`)
+5. Commit changes (`git commit -m 'Add amazing feature'`)
+6. Push to branch (`git push origin feature/amazing-feature`)
+7. Open a Pull Request
 
 ### Code Standards
 
 - Follow TypeScript best practices
 - Add JSDoc comments for public APIs
-- Write tests for new functionality
 - Use Biome for formatting and linting
 - Maintain type safety
 
@@ -267,17 +229,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- Built with [Next.js](https://nextjs.org) and [React](https://react.dev)
+- Built with [Vite](https://vite.dev) and [React](https://react.dev)
 - UI components from [Radix UI](https://www.radix-ui.com)
-- Icons from [Lucide](https://lucide.dev)
 - Powered by [Bun](https://bun.sh)
 
 ## 📊 Project Stats
 
 - **Language**: TypeScript
-- **Framework**: Next.js 15
+- **Build Tool**: Vite
 - **Runtime**: Bun
-- **Deployment**: Netlify
 - **License**: MIT
-
----

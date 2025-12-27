@@ -1,7 +1,6 @@
-'use client';
-
 import type React from 'react';
 import { useState } from 'react';
+import { Footer } from '@/components/Footer';
 import { JsonItemEditor } from '@/components/JsonItemEditor';
 import { Textarea } from '@/components/ui/textarea';
 import { analyzeJsonStructure, fastHash, parseJson } from '@/lib/utils';
@@ -27,14 +26,8 @@ import type { FieldMetadata } from '@/types';
  *
  * @component
  * @returns {React.ReactElement} The main JSON editor interface
- *
- * @example
- * ```tsx
- * // The component is used as a default export in the app
- * export default JsonEditor;
- * ```
  */
-const JsonEditor: React.FC = () => {
+const App: React.FC = () => {
     /**
      * Raw JSON text input by the user.
      * Updated whenever the textarea changes.
@@ -124,41 +117,44 @@ const JsonEditor: React.FC = () => {
     };
 
     return (
-        <div className="container mx-auto w-full space-y-6 p-6">
-            <div className="space-y-2">
-                <Textarea
-                    id="json-input"
-                    value={jsonText}
-                    onFocus={() => {
-                        if (editedData.length) {
-                            const savedJson = JSON.stringify(editedData, null, 2);
-                            setJsonText(savedJson);
-                        }
-                    }}
-                    onChange={(e) => handleJsonInput(e.target.value)}
-                    placeholder="Paste your JSON array here..."
-                    className="min-h-[150px] w-full text-[10px] md:text-[10px]"
-                />
-                {error && <p className="text-red-500 text-sm">{error}</p>}
-            </div>
-
-            {parsedData && editedData.length > 0 && (
-                <div className="space-y-4">
-                    {editedData.map((item, index) => (
-                        <JsonItemEditor
-                            key={fastHash(item)}
-                            item={item}
-                            index={index}
-                            fields={fields}
-                            onDeleteField={handleDeleteField}
-                            onDuplicate={handleDuplicateItem}
-                            onUpdate={handleFieldUpdate}
-                        />
-                    ))}
+        <div className="flex min-h-screen flex-col antialiased">
+            <main className="container mx-auto w-full flex-1 space-y-6 p-6">
+                <div className="space-y-2">
+                    <Textarea
+                        id="json-input"
+                        value={jsonText}
+                        onFocus={() => {
+                            if (editedData.length) {
+                                const savedJson = JSON.stringify(editedData, null, 2);
+                                setJsonText(savedJson);
+                            }
+                        }}
+                        onChange={(e) => handleJsonInput(e.target.value)}
+                        placeholder="Paste your JSON array here..."
+                        className="min-h-[150px] w-full text-[10px] md:text-[10px]"
+                    />
+                    {error && <p className="text-red-500 text-sm">{error}</p>}
                 </div>
-            )}
+
+                {parsedData && editedData.length > 0 && (
+                    <div className="space-y-4">
+                        {editedData.map((item, index) => (
+                            <JsonItemEditor
+                                key={fastHash(item)}
+                                item={item}
+                                index={index}
+                                fields={fields}
+                                onDeleteField={handleDeleteField}
+                                onDuplicate={handleDuplicateItem}
+                                onUpdate={handleFieldUpdate}
+                            />
+                        ))}
+                    </div>
+                )}
+            </main>
+            <Footer />
         </div>
     );
 };
 
-export default JsonEditor;
+export default App;
