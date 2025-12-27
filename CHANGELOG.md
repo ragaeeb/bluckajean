@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/ragaeeb/bluckajean/compare/v1.1.1...v1.2.0) (2025-12-27)
+
+
+### Features
+
+* **vite:** Migrate app to vite ([ace9660](https://github.com/ragaeeb/bluckajean/commit/ace966098ee19361168ebf445e218c5ae6fe2450))
+
 ## [1.1.1](https://github.com/ragaeeb/bluckajean/compare/v1.1.0...v1.1.1) (2025-11-04)
 
 
