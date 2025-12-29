@@ -9,16 +9,18 @@
 ![GitHub License](https://img.shields.io/github/license/ragaeeb/bluckajean)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A powerful, intuitive visual JSON array editor built with Vite, React 19, and TypeScript. Edit JSON data with intelligent field detection, automatic type inference, and a clean, responsive interface.
+A powerful, intuitive visual JSON toolkit built with Vite, React 19, and TypeScript. Edit JSON data with intelligent field detection, automatic type inference, and a clean, responsive interface.
+
+**🌐 Live Demo:** [bluckajean.vercel.app](https://bluckajean.vercel.app)
 
 ## ✨ Features
 
-### Intelligent JSON Parsing
+### 📝 JSON Array Editor
+A visual editor for JSON arrays with intelligent field detection.
+
 - **Automatic Error Correction**: Handles missing brackets, trailing commas, and common JSON formatting issues
 - **Smart Type Detection**: Automatically identifies strings, numbers, and booleans
 - **Long Text Recognition**: Detects fields with >100 characters or newlines for optimized display
-
-### Dynamic User Interface
 - **Adaptive Input Controls**: Renders the appropriate UI component based on field type
   - Text inputs for short strings
   - Textareas for long text (with RTL support)
@@ -26,11 +28,21 @@ A powerful, intuitive visual JSON array editor built with Vite, React 19, and Ty
 - **Responsive Layout**: Numeric fields grouped horizontally, text fields stacked vertically
 - **Real-Time Editing**: Changes are tracked and can be copied back to the JSON input
 
+### 🧬 JSON Distiller
+Extract unique value variations from large JSON arrays to create minimal samples.
+
+- **Drag & Drop Interface**: Simply drop a JSON file to process it
+- **Smart Array Distillation**: Analyzes arrays to extract representative samples of each value type (null, string, number, object, etc.)
+- **Configurable Sampling**: Adjust the number of samples per category (1-10)
+- **AI-Friendly Output**: Creates minimal JSON samples perfect for AI agents to understand structure or generate type definitions
+- **Click or Drag**: Upload files via drag-and-drop or click to browse
+
 ### Developer Experience
 - Built with Vite and React 19
 - Full TypeScript support with comprehensive type safety
 - Tailwind CSS for styling
 - Bun for fast package management and testing
+- Client-side routing with wouter
 - JSDoc documentation throughout the codebase
 
 ## 🚀 Getting Started
@@ -127,15 +139,21 @@ Long text fields automatically enable RTL (right-to-left) text direction, perfec
 bluckajean/
 ├── src/
 │   ├── main.tsx                  # Vite entry point
-│   ├── App.tsx                   # Main application component
+│   ├── App.tsx                   # Main application component with routing
 │   ├── index.css                 # Global styles and Tailwind config
 │   ├── components/
 │   │   ├── ui/                   # UI primitives (Input, Label, Textarea)
+│   │   ├── Navigation.tsx        # Top navigation bar
+│   │   ├── JsonEditor.tsx        # JSON Array Editor page
+│   │   ├── JsonDistillerPage.tsx # JSON Distiller page
+│   │   ├── DropZone.tsx          # Accessible drag-and-drop file upload
 │   │   ├── FieldEditor.tsx       # Individual field editor
 │   │   ├── JsonItemEditor.tsx    # JSON item card component
+│   │   ├── DeleteButton.tsx      # Delete field button
 │   │   └── Footer.tsx            # App footer
 │   ├── lib/
-│   │   └── utils.ts              # Utility functions (parsing, analysis)
+│   │   ├── utils.ts              # Utility functions (parsing, analysis)
+│   │   └── distill.ts            # JSON array distillation logic
 │   └── types/
 │       └── index.ts              # TypeScript type definitions
 ├── index.html                    # HTML entry point
@@ -156,6 +174,9 @@ bluckajean/
 - **[Tailwind CSS 4](https://tailwindcss.com)** - Utility-first CSS
 - **[Radix UI](https://www.radix-ui.com)** - Accessible component primitives
 
+### Routing
+- **[wouter](https://github.com/molefrog/wouter)** - Lightweight client-side routing
+
 ### Development Tools
 - **[Bun](https://bun.sh)** - Fast JavaScript runtime and package manager
 - **[Biome](https://biomejs.dev)** - Fast formatter and linter
@@ -175,7 +196,9 @@ Comprehensive JSDoc comments throughout the codebase explain:
 
 ## 🚀 Deployment
 
-### Vercel
+This project is deployed on **Vercel** at [bluckajean.vercel.app](https://bluckajean.vercel.app).
+
+### Deploy Your Own
 
 ```bash
 # Install Vercel CLI
@@ -185,15 +208,7 @@ npm i -g vercel
 vercel
 ```
 
-### Netlify
-
-1. **Connect Repository**: Link your GitHub repository to Netlify
-2. **Build Settings**:
-   - Build command: `bun run build`
-   - Publish directory: `dist`
-3. **Deploy**: Netlify will automatically build and deploy your site
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/ragaeeb/bluckajean)
+Or connect your GitHub repository to Vercel for automatic deployments on every push.
 
 ## 🤝 Contributing
 

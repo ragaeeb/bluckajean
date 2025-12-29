@@ -13,3 +13,14 @@ export type FieldType = 'string' | 'number' | 'boolean';
  * @property {boolean} isLongText - Whether the field should be rendered as a textarea (true for text > 100 chars or containing newlines)
  */
 export type FieldMetadata = { key: string; type: FieldType; isLongText: boolean };
+
+/**
+ * Categories of values for distillation.
+ * Used to identify unique value types when reducing arrays.
+ */
+export type ValueCategory = 'null' | 'undefined' | 'number' | 'string' | 'boolean' | 'object' | 'array' | 'other';
+
+/**
+ * Represents a distilled value with its category.
+ */
+export type DistilledValue = { category: ValueCategory; value: unknown };
