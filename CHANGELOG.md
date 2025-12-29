@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/ragaeeb/bluckajean/compare/v1.2.0...v1.3.0) (2025-12-29)
+
+
+### Features
+
+* **distill:** Add JSON distiller ([1252cb0](https://github.com/ragaeeb/bluckajean/commit/1252cb01b2343799b8e4aa2a4cc3c7c3a5d4555e))
+
 # [1.2.0](https://github.com/ragaeeb/bluckajean/compare/v1.1.1...v1.2.0) (2025-12-27)
 
 
